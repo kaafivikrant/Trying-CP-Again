@@ -22,13 +22,13 @@ int	main()
         a.push_back(temp);
     }
 
-    sort(a.begin(), a.end(), greater<ll>());
+    sort(a.begin(), a.end());
 
     ll sum1 = a[0];
     ll sum2 = 0;
 
     for(ll i=1; i<n; i++){
-        if(sum2 < sum1){
+        if(sum2 > sum1){
             sum2 += a[i];
         }
         else{
