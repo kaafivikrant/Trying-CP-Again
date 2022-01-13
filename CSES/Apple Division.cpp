@@ -5,7 +5,6 @@
 #include<numeric>
 #include<algorithm>
 #define fio ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
-#define temps int temp = 0;cin >> temp;
 
 using namespace std;
 typedef long long ll;
@@ -15,28 +14,26 @@ int	main()
     fio;
     ll n;
     cin >> n;
-    vector<ll> a;
+    vector<ll> a(n);
+    for (ll i = 0; i < n; i++)
+        cin >> a[i];
+    
+    ll minimum = 1e18;
 
-    for(ll i=0; i<n; i++){
-        temps;
-        a.push_back(temp);
-    }
-
-    sort(a.begin(), a.end());
-
-    ll sum1 = a[0];
-    ll sum2 = 0;
-
-    for(ll i=1; i<n; i++){
-        if(sum2 > sum1){
-            sum2 += a[i];
+    for(ll mask=0;mask<(1<<n);mask++)
+    {
+        ll sumA = 0;
+        ll sumB = 0;
+        for(ll i=0;i<n;i++)
+        {
+            if(mask&(1<<i))
+                sumA += a[i];
+            else
+                sumB += a[i];
         }
-        else{
-            sum1 += a[i];
-        }
+        minimum = min(minimum,abs(sumA-sumB));
     }
-
-    cout<<max(sum1, sum2) - min(sum1, sum2)<<endl;
+    cout << minimum << endl;
 
     return 0;
 }
