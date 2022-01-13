@@ -4,39 +4,40 @@
 #include<string>
 #include<numeric>
 #include<algorithm>
+#include<set>
+#include<utility>
 #define fio ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
-#define temps int temp = 0;cin >> temp;
 
 using namespace std;
 typedef long long ll;
 
-int	main()
-{
+int main(){
     fio;
     ll n;
     cin >> n;
-    vector<ll> a;
+    int sum = 0;
 
-    for(ll i=0; i<n; i++){
-        temps;
-        a.push_back(temp);
+    vector<ll> a(n);
+    for(int i=0; i<n; i++){
+        cin >> a[i];
+        sum += a[i];
     }
 
-    sort(a.begin(), a.end(), greater<ll>());
+    ll median = sum/n;
 
-    ll sum1 = a[0];
-    ll sum2 = 0;
+    ll count = 0;
 
-    for(ll i=1; i<n; i++){
-        if(sum2 < sum1){
-            sum2 += a[i];
+    for(int i=0; i<n; i++){
+        if(a[i] > median){
+            count += a[i] - median;
         }
         else{
-            sum1 += a[i];
+            count += median - a[i];
         }
     }
 
-    cout<<max(sum1, sum2) - min(sum1, sum2)<<endl;
+    cout << count << endl;
+
 
     return 0;
 }
